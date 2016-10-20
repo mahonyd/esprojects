@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace Estream.Mvc
 {
@@ -27,12 +28,15 @@ namespace Estream.Mvc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Get AppSettings configuration
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+
             // Add framework services.
             services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IOptions<AppSettings> settings)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -59,7 +63,8 @@ namespace Estream.Mvc
                 AuthenticationScheme = "oidc",
                 SignInScheme = "Cookies",
 
-                Authority = "http://localhost:5000",
+                //Authority = "http://localhost:5000",
+                Authority = settings.Value.BaseUrls.Auth,
                 RequireHttpsMetadata = false,
 
                 ClientId = "mvc",

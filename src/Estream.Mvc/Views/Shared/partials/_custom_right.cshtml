@@ -1,0 +1,13 @@
+﻿<li>
+    @if (User.Identity.IsAuthenticated)
+    {
+
+        <a href="@Url.Action("HelpPage", "Help")" class="eden-menu-icon" style="margin-right:30px;"><i class="fa fa-question-circle fa-2x"></i>&nbsp;Help</a>
+    }
+    else
+    {
+        <a target="_blank" href="@Url.Action("GetHelpFileForReg", "Help")" class="eden-menu-icon"><i class="fa fa-question-circle fa-2x"></i>&nbsp;Help</a>
+    }
+
+</li>
+

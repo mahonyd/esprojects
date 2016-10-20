@@ -1,0 +1,34 @@
+﻿<div class="navigation-wrap">
+    <nav class="navbar navbar-inverse navbar-fullwidth customize-navbar" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#estream-menu">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <nav class="collapse navbar-collapse" id="estream-menu">
+                <ul class="nav navbar-nav">
+
+                    <li>
+                        <a href="@Url.Action("Index", "Home")" class="estream-home-icon"><i class="fa fa-home fa-2x"></i></a>
+                    </li>
+                    <li>
+                        <a asp-action="Action" asp-controller="Controller">Menu Item 1</a>
+                    </li>
+                </ul>
+
+                <!-- Pull help menu to right -->
+                <ul class="nav navbar-nav navbar-right">
+                    @Html.Partial("partials/_custom_right")
+                </ul>
+
+            </nav>
+        </div>
+    </nav>
+</div>

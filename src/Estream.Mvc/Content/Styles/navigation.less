@@ -1,0 +1,97 @@
+﻿/*!
+    This is top navigation bar, where User Actions, Admin Actions, etc. exist
+*/
+.estream-banner-top-navbar {
+    
+    /* Change toggle to inverse mode */
+    .navbar-toggle {
+
+        border-color: @navbar-inverse-toggle-border-color;
+        &:hover,
+        &:focus {
+          background-color: @navbar-inverse-toggle-hover-bg;
+          .icon-bar {
+              background-color: #ffffff;
+          }
+      
+        }
+
+        .icon-bar {
+          background-color: @navbar-inverse-bg;
+        }
+  }
+
+    /*
+        Backgground colors for top navigations including
+        special styling for first and last childs with 
+        handling special case for A anchros and round
+        corners
+    */
+    .navbar-nav {
+        > li {
+            &:first-child {
+                
+                border-top-left-radius: 5px;
+                border-bottom-left-radius: 5px;
+                
+                /*.css3()*/
+
+                > a {
+                    border-top-left-radius: 5px;
+                    border-bottom-left-radius: 5px;
+                }
+            }
+
+            &:last-child {
+                border-top-right-radius: 5px;
+                border-bottom-right-radius: 5px;
+
+                > a {
+                    border-top-right-radius: 5px;
+                    border-bottom-right-radius: 5px;
+                }
+            }
+
+            &.section2 {
+                background: lighten(@brand-primary, 30%);
+            }
+
+            &.section3 {
+                background: lighten(@brand-primary, 20%);
+            }
+
+            &.section4 {
+                background: lighten(@brand-primary, 10%);
+            }
+
+            &.section5 {
+                background: @brand-primary;
+            }
+
+            > a {
+                /*-moz-box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;*/
+                color: #fff;
+                font-weight: normal;
+
+                &:hover,
+                &:focus {
+                    color: @navbar-inverse-link-hover-color;
+                    background-color: @navbar-inverse-link-hover-bg;
+                }
+            }
+            > .active > a {
+              &,
+              &:hover,
+              &:focus {
+                color: @navbar-inverse-link-active-color;
+                background-color: @navbar-inverse-link-active-bg;
+              }
+            }
+        }
+    }
+}
+
+
+

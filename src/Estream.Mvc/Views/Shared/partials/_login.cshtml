@@ -1,0 +1,21 @@
+﻿@if (User.Identity.IsAuthenticated)
+{
+    <li class="dropdown section4">
+        <a href="#" id="banner-top-nav-user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-user" aria-hidden="true"></i>
+                @User.Identity.Name
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="banner-top-nav-user">
+            <li><a asp-action="Index" asp-controller="Profile">My Profile</a></li>
+            <li><a asp-action="ChangePassword" asp-controller="Account">Change Password</a></li>
+            <li><a asp-action="Logout" asp-controller="Account">Logout</a></li>
+        </ul>
+    </li>
+}
+else
+{
+    <li class="section4">
+        <a asp-action="Secure" asp-controller="Home"><i class="fa fa-lock"></i> Sign In</a>
+    </li>
+}
