@@ -5,12 +5,20 @@ using Microsoft.AspNetCore.Authentication;
 using System.Net.Http;
 using Newtonsoft.Json.Linq;
 using System.Net.Http.Headers;
+using Microsoft.Extensions.Options;
 
 namespace Estream.Mvc.Controllers
 {
     
     public class HomeController : Controller
     {
+        private readonly AppSettings _appSettings;
+
+        public HomeController(IOptions<AppSettings> appSettings)
+        {
+            _appSettings = appSettings.Value;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -33,7 +41,7 @@ namespace Estream.Mvc.Controllers
 
             var client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-            var response = await client.GetStringAsync("http://localhost:5001/identity");
+            var response = await client.GetStringAsync(_appSettings.BaseUrls.Api + "/identity");
 
             ViewBag.Json = JArray.Parse(response).ToString();
             return View();
