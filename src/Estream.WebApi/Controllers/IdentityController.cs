@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,13 @@ namespace Estream.WebApi.Controllers
     [Authorize]
     public class IdentityController : ControllerBase
     {
+        private readonly AppSettings _appSettings;
+
+        public IdentityController(IOptions<AppSettings> appSettings)
+        {
+            _appSettings = appSettings.Value;
+        }
+
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -32,7 +40,7 @@ namespace Estream.WebApi.Controllers
 
             var client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken.Result.AccessToken);
-            var response = await client.GetStringAsync("http://localhost:5004/backendidentity");
+            var response = await client.GetStringAsync(_appSettings.BaseUrls.BackendApi + "/backendidentity");
 
             List<Claim> api2Claims = JsonConvert.DeserializeObject<List<Claim>>(response, new ClaimConverter());
             foreach (var c in api2Claims)
