@@ -53,7 +53,7 @@ namespace Estream.WebApi.Controllers
 
         public async Task<TokenResponse> DelegateAsync(string userToken)
         {
-            var disco = await DiscoveryClient.GetAsync("http://localhost:5000");
+            var disco = await DiscoveryClient.GetAsync(_appSettings.BaseUrls.Auth);
 
             var payload = new
             {
