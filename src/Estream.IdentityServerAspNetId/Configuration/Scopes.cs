@@ -29,7 +29,32 @@ namespace Estream.IdentityServerAspNetId.Configuration
                     DisplayName = "My API 2",
                     Description = "My API 2",
                     Type = ScopeType.Resource
+                },
+
+                new Scope
+                {
+                    Name = "dataEventRecords",
+                    DisplayName = "Scope for the dataEventRecords"
+                },
+                
+                new Scope
+                {
+                    Name = "dataeventrecordsscope",
+                    DisplayName = "Scope for the dataEventRecords ApiResource"
+                },
+
+                new Scope
+                {
+                    Name = "securedFiles",
+                    DisplayName = "Scope for the securedFiles"
+                },
+
+                new Scope
+                {
+                    Name = "securedfilesscope",
+                    DisplayName = "Scope for the securedFiles ApiResource"
                 }
+
             };
         }
     }

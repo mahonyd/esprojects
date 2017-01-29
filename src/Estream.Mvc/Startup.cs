@@ -33,6 +33,14 @@ namespace Estream.Mvc
 
             // Add framework services.
             services.AddMvc();
+
+            // Add authorisation policies
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(
+                    "Administrator",
+                    policyBuilder => policyBuilder.RequireClaim("Administrator"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -44,6 +44,9 @@ namespace Estream.IdentityServerAspNetId
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Get AppSettings configuration
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+
             var sqlConnStr = Configuration.GetConnectionString("DefaultConnection");
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
 

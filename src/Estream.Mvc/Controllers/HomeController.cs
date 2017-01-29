@@ -47,9 +47,11 @@ namespace Estream.Mvc.Controllers
             return View();
         }
 
-        public IActionResult About()
+        [Authorize(Policy = "Administrator")]
+
+        public IActionResult Admin()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "Your administration application description page.";
 
             return View();
         }

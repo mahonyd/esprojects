@@ -1,4 +1,4 @@
-﻿{
+{
   "userSecretsId": "aspnet-Estream.IdentityServerAspNetId-47dcf487-f80c-4a81-a7cf-dd2655723439",
 
   "dependencies": {
@@ -46,8 +46,8 @@
     "IdentityServer4": "1.0.0-rc1-update2",
     "IdentityServer4.AspNetIdentity": "1.0.0-rc1-update2",
     "IdentityServer4.EntityFramework": "1.0.0-rc1-update2",
-    "Microsoft.AspNetCore.Authentication.Google": "1.0.0"
-
+    "Microsoft.AspNetCore.Authentication.Google": "1.0.0",
+    "Twilio": "5.0.0-rca1"
   },
 
   "tools": {

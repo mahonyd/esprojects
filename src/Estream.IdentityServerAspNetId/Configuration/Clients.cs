@@ -152,6 +152,40 @@ namespace Estream.IdentityServerAspNetId.Configuration
                         StandardScopes.Profile.Name,
                         "api1"
                     }
+                },
+
+                new Client
+                {
+                    ClientName = "Angular 2 Client",
+                    ClientId = "angular2client",
+                    RequireConsent = false,
+                    AccessTokenType = AccessTokenType.Reference,
+                    //AccessTokenLifetime = 600, // 10 minutes, default 60 minutes
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
+                    RedirectUris = new List<string>
+                    {
+                        "http://localhost:5004"
+
+                    },
+                    PostLogoutRedirectUris = new List<string>
+                    {
+                        "http://localhost:5004" + "/Unauthorized"
+                    },
+                    AllowedCorsOrigins = new List<string>
+                    {
+                        "http://localhost:5004"
+                    },
+                    AllowedScopes = new List<string>
+                    {
+                        "openid",
+                        "dataEventRecords",
+                        "dataeventrecordsscope",
+                        "securedFiles",
+                        "securedfilesscope",
+                        "role"
+
+                    }
                 }
 
             };
