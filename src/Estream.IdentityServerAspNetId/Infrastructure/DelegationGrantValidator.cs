@@ -22,14 +22,14 @@ namespace Estream.IdentityServerAspNetId.Infrastructure
 
             if (string.IsNullOrEmpty(userToken))
             {
-                context.Result = new GrantValidationResult(TokenErrors.InvalidGrant);
+                context.Result = new GrantValidationResult(TokenRequestErrors.InvalidGrant);
                 return;
             }
 
             var result = await _validator.ValidateAccessTokenAsync(userToken);
             if (result.IsError)
             {
-                context.Result = new GrantValidationResult(TokenErrors.InvalidGrant);
+                context.Result = new GrantValidationResult(TokenRequestErrors.InvalidGrant);
                 return;
             }
 

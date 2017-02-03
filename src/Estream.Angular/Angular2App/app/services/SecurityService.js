@@ -12,7 +12,7 @@ import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Configuration } from '../app.constants';
 import { Router } from '@angular/router';
-export var SecurityService = (function () {
+var SecurityService = (function () {
     function SecurityService(_http, _configuration, _router) {
         var _this = this;
         this._http = _http;
@@ -197,9 +197,11 @@ export var SecurityService = (function () {
             this.headers.append('Authorization', 'Bearer ' + token);
         }
     };
-    SecurityService = __decorate([
-        Injectable(), 
-        __metadata('design:paramtypes', [Http, Configuration, Router])
-    ], SecurityService);
     return SecurityService;
 }());
+SecurityService = __decorate([
+    Injectable(),
+    __metadata("design:paramtypes", [Http, Configuration, Router])
+], SecurityService);
+export { SecurityService };
+//# sourceMappingURL=SecurityService.js.map

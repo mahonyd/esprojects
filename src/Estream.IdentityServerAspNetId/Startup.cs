@@ -17,11 +17,16 @@ using Estream.IdentityServerAspNetId.Services;
 using Estream.IdentityServerAspNetId.Configuration;
 using Estream.IdentityServerAspNetId.Infrastructure;
 using IdentityServer4.Configuration;
+using System.Security.Cryptography.X509Certificates;
+using System.IO;
 
 namespace Estream.IdentityServerAspNetId
 {
     public class Startup
     {
+        private readonly IHostingEnvironment _environment;
+        public IConfigurationRoot Configuration { get; }
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -37,13 +42,15 @@ namespace Estream.IdentityServerAspNetId
 
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
-        }
 
-        public IConfigurationRoot Configuration { get; }
+            _environment = env;
+        }        
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var cert = new X509Certificate2(Path.Combine(_environment.ContentRootPath, "idsvr3test.pfx"), "idsrv3test");
+
             // Get AppSettings configuration
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
@@ -72,7 +79,8 @@ namespace Estream.IdentityServerAspNetId
             //    .AddInMemoryClients(Clients.GetClients())
             //    .AddAspNetIdentity<ApplicationUser>();
 
-            services.AddDeveloperIdentityServer()
+            services.AddIdentityServer()
+                .AddSigningCredential(cert)
                 .AddAspNetIdentity<ApplicationUser>()
                 .AddConfigurationStore(builder =>
                     builder.UseSqlServer(sqlConnStr, options =>
@@ -116,6 +124,7 @@ namespace Estream.IdentityServerAspNetId
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme,
+                //AuthenticationScheme = "my-partial",
 
                 AutomaticAuthenticate = false,
                 AutomaticChallenge = false
@@ -158,11 +167,20 @@ namespace Estream.IdentityServerAspNetId
                     context.SaveChanges();
                 }
 
-                if (!context.Scopes.Any())
+                if (!context.IdentityResources.Any())
                 {
-                    foreach (var client in Scopes.GetScopes())
+                    foreach (var resource in Resources.GetIdentityResources())
                     {
-                        context.Scopes.Add(client.ToEntity());
+                        context.IdentityResources.Add(resource.ToEntity());
+                    }
+                    context.SaveChanges();
+                }
+
+                if (!context.ApiResources.Any())
+                {
+                    foreach (var resource in Resources.GetApiResources())
+                    {
+                        context.ApiResources.Add(resource.ToEntity());
                     }
                     context.SaveChanges();
                 }

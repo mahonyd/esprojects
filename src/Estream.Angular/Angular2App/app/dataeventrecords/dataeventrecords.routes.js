@@ -21,3 +21,4 @@ export var DATA_RECORDS_ROUTES = [
         ]
     }
 ];
+//# sourceMappingURL=dataeventrecords.routes.js.map

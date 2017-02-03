@@ -11,7 +11,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { SecurityService } from '../services/SecurityService';
 import { DataEventRecordsService } from '../dataeventrecords/DataEventRecordsService';
-export var DataEventRecordsCreateComponent = (function () {
+var DataEventRecordsCreateComponent = (function () {
     function DataEventRecordsCreateComponent(_dataEventRecordsService, securityService, _router) {
         this._dataEventRecordsService = _dataEventRecordsService;
         this.securityService = securityService;
@@ -29,12 +29,14 @@ export var DataEventRecordsCreateComponent = (function () {
             .Add(this.DataEventRecord)
             .subscribe(function (data) { return _this.DataEventRecord = data; }, function (error) { return _this.securityService.HandleError(error); }, function () { return _this._router.navigate(['/dataeventrecords']); });
     };
-    DataEventRecordsCreateComponent = __decorate([
-        Component({
-            selector: 'dataeventrecords-create',
-            templateUrl: 'dataeventrecords-create.component.html'
-        }), 
-        __metadata('design:paramtypes', [DataEventRecordsService, SecurityService, Router])
-    ], DataEventRecordsCreateComponent);
     return DataEventRecordsCreateComponent;
 }());
+DataEventRecordsCreateComponent = __decorate([
+    Component({
+        selector: 'dataeventrecords-create',
+        templateUrl: 'dataeventrecords-create.component.html'
+    }),
+    __metadata("design:paramtypes", [DataEventRecordsService, SecurityService, Router])
+], DataEventRecordsCreateComponent);
+export { DataEventRecordsCreateComponent };
+//# sourceMappingURL=dataeventrecords-create.component.js.map

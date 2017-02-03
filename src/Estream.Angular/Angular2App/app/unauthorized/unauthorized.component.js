@@ -8,18 +8,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component } from '@angular/core';
-export var UnauthorizedComponent = (function () {
+var UnauthorizedComponent = (function () {
     function UnauthorizedComponent() {
         this.message = "UnauthorizedComponent constructor";
     }
     UnauthorizedComponent.prototype.ngOnInit = function () {
     };
-    UnauthorizedComponent = __decorate([
-        Component({
-            selector: 'unauthorized',
-            templateUrl: 'unauthorized.component.html'
-        }), 
-        __metadata('design:paramtypes', [])
-    ], UnauthorizedComponent);
     return UnauthorizedComponent;
 }());
+UnauthorizedComponent = __decorate([
+    Component({
+        selector: 'unauthorized',
+        templateUrl: 'unauthorized.component.html'
+    }),
+    __metadata("design:paramtypes", [])
+], UnauthorizedComponent);
+export { UnauthorizedComponent };
+//# sourceMappingURL=unauthorized.component.js.map

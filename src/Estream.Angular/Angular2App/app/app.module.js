@@ -4,9 +4,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -24,37 +21,38 @@ import { SecureFilesComponent } from './securefile/securefiles.component';
 import { DataEventRecordsListComponent } from './dataeventrecords/dataeventrecords-list.component';
 import { DataEventRecordsCreateComponent } from './dataeventrecords/dataeventrecords-create.component';
 import { DataEventRecordsEditComponent } from './dataeventrecords/dataeventrecords-edit.component';
-export var AppModule = (function () {
+var AppModule = (function () {
     function AppModule() {
     }
-    AppModule = __decorate([
-        NgModule({
-            imports: [
-                BrowserModule,
-                FormsModule,
-                routing,
-                HttpModule,
-                JsonpModule
-            ],
-            declarations: [
-                AppComponent,
-                ForbiddenComponent,
-                HomeComponent,
-                UnauthorizedComponent,
-                SecureFilesComponent,
-                DataEventRecordsListComponent,
-                DataEventRecordsCreateComponent,
-                DataEventRecordsEditComponent
-            ],
-            providers: [
-                SecurityService,
-                SecureFileService,
-                DataEventRecordsService,
-                Configuration
-            ],
-            bootstrap: [AppComponent],
-        }), 
-        __metadata('design:paramtypes', [])
-    ], AppModule);
     return AppModule;
 }());
+AppModule = __decorate([
+    NgModule({
+        imports: [
+            BrowserModule,
+            FormsModule,
+            routing,
+            HttpModule,
+            JsonpModule
+        ],
+        declarations: [
+            AppComponent,
+            ForbiddenComponent,
+            HomeComponent,
+            UnauthorizedComponent,
+            SecureFilesComponent,
+            DataEventRecordsListComponent,
+            DataEventRecordsCreateComponent,
+            DataEventRecordsEditComponent
+        ],
+        providers: [
+            SecurityService,
+            SecureFileService,
+            DataEventRecordsService,
+            Configuration
+        ],
+        bootstrap: [AppComponent],
+    })
+], AppModule);
+export { AppModule };
+//# sourceMappingURL=app.module.js.map

@@ -47,6 +47,19 @@ namespace Estream.WebApi
                 .AddAuthorization()
                 .AddJsonFormatters();
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("api1Admin", policyAdmin =>
+                {
+                    policyAdmin.RequireClaim("role", "api1.admin");
+                });
+                options.AddPolicy("api1User", policyUser =>
+                {
+                    policyUser.RequireClaim("role", "api1.user");
+                });
+
+            });
+
             // Add framework services.
             services.AddMvc();
         }
@@ -63,7 +76,9 @@ namespace Estream.WebApi
             app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
             {
                 Authority = settings.Value.BaseUrls.Auth,
-                ScopeName = "api1",
+                AllowedScopes = new List<string> { "api1" },
+                ApiSecret = "api1Secret",
+                ApiName = "api1",
 
                 RequireHttpsMetadata = false
             });

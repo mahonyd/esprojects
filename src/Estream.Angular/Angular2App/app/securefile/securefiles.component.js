@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component } from '@angular/core';
 import { SecureFileService } from './SecureFileService';
 import { SecurityService } from '../services/SecurityService';
-export var SecureFilesComponent = (function () {
+var SecureFilesComponent = (function () {
     function SecureFilesComponent(_secureFileService, securityService) {
         this._secureFileService = _secureFileService;
         this.securityService = securityService;
@@ -27,13 +27,15 @@ export var SecureFilesComponent = (function () {
         this._secureFileService.GetListOfFiles()
             .subscribe(function (data) { return _this.Files = data; }, function (error) { return _this.securityService.HandleError(error); }, function () { return console.log('Get all completed'); });
     };
-    SecureFilesComponent = __decorate([
-        Component({
-            selector: 'securefiles',
-            templateUrl: 'securefiles.component.html',
-            providers: [SecureFileService]
-        }), 
-        __metadata('design:paramtypes', [SecureFileService, SecurityService])
-    ], SecureFilesComponent);
     return SecureFilesComponent;
 }());
+SecureFilesComponent = __decorate([
+    Component({
+        selector: 'securefiles',
+        templateUrl: 'securefiles.component.html',
+        providers: [SecureFileService]
+    }),
+    __metadata("design:paramtypes", [SecureFileService, SecurityService])
+], SecureFilesComponent);
+export { SecureFilesComponent };
+//# sourceMappingURL=securefiles.component.js.map

@@ -8,18 +8,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component } from '@angular/core';
-export var ForbiddenComponent = (function () {
+var ForbiddenComponent = (function () {
     function ForbiddenComponent() {
         this.message = "ForbiddenComponent constructor";
     }
     ForbiddenComponent.prototype.ngOnInit = function () {
     };
-    ForbiddenComponent = __decorate([
-        Component({
-            selector: 'forbidden',
-            templateUrl: 'forbidden.component.html'
-        }), 
-        __metadata('design:paramtypes', [])
-    ], ForbiddenComponent);
     return ForbiddenComponent;
 }());
+ForbiddenComponent = __decorate([
+    Component({
+        selector: 'forbidden',
+        templateUrl: 'forbidden.component.html'
+    }),
+    __metadata("design:paramtypes", [])
+], ForbiddenComponent);
+export { ForbiddenComponent };
+//# sourceMappingURL=forbidden.component.js.map

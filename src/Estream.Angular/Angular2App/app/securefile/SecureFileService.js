@@ -12,7 +12,7 @@ import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Configuration } from '../app.constants';
 import { SecurityService } from '../services/SecurityService';
-export var SecureFileService = (function () {
+var SecureFileService = (function () {
     function SecureFileService(_http, _configuration, _securityService) {
         var _this = this;
         this._http = _http;
@@ -51,9 +51,11 @@ export var SecureFileService = (function () {
             this.headers.append('Authorization', 'Bearer ' + token);
         }
     };
-    SecureFileService = __decorate([
-        Injectable(), 
-        __metadata('design:paramtypes', [Http, Configuration, SecurityService])
-    ], SecureFileService);
     return SecureFileService;
 }());
+SecureFileService = __decorate([
+    Injectable(),
+    __metadata("design:paramtypes", [Http, Configuration, SecurityService])
+], SecureFileService);
+export { SecureFileService };
+//# sourceMappingURL=SecureFileService.js.map

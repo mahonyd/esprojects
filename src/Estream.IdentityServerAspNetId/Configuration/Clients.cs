@@ -1,8 +1,10 @@
-﻿using IdentityServer4.Models;
+﻿using IdentityServer4;
+using IdentityServer4.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static IdentityServer4.IdentityServerConstants;
 
 namespace Estream.IdentityServerAspNetId.Configuration
 {
@@ -26,7 +28,8 @@ namespace Estream.IdentityServerAspNetId.Configuration
 
                     AllowedScopes = new List<string>
                     {
-                        "api2"
+                        "api2",
+                        "api2scope"
                     }
                 },
 
@@ -47,7 +50,8 @@ namespace Estream.IdentityServerAspNetId.Configuration
                     // scopes that client has access to
                     AllowedScopes = new List<string>
                     {
-                        "api1"
+                        "api1",
+                        "api1scope"
                     }
                 },
 
@@ -63,7 +67,8 @@ namespace Estream.IdentityServerAspNetId.Configuration
                     },
                     AllowedScopes = new List<string>
                     {
-                        "api1"
+                        "api1",
+                        "api1scope"
                     }
                 },
 
@@ -116,13 +121,17 @@ namespace Estream.IdentityServerAspNetId.Configuration
                         "http://localhost:5002"
                     },
 
-                    AllowedScopes = new List<string>
+                    AllowedScopes =
                     {
-                        StandardScopes.OpenId.Name,
-                        StandardScopes.Profile.Name,
-                        StandardScopes.OfflineAccess.Name,
-                        "api1"
-                    }
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "role",
+                        "api1",
+                        "api1scope",
+                        "role"
+                    },
+                    AllowOfflineAccess = true
+
                 },
 
                 // JavaScript Client
@@ -148,8 +157,8 @@ namespace Estream.IdentityServerAspNetId.Configuration
 
                     AllowedScopes = new List<string>
                     {
-                        StandardScopes.OpenId.Name,
-                        StandardScopes.Profile.Name,
+                        StandardScopes.OpenId,
+                        StandardScopes.Profile,
                         "api1"
                     }
                 },

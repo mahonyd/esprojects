@@ -11,7 +11,7 @@ import { Component } from '@angular/core';
 import { SecurityService } from '../services/SecurityService';
 import { Router } from '@angular/router';
 import { DataEventRecordsService } from '../dataeventrecords/DataEventRecordsService';
-export var DataEventRecordsListComponent = (function () {
+var DataEventRecordsListComponent = (function () {
     function DataEventRecordsListComponent(_dataEventRecordsService, securityService, _router) {
         this._dataEventRecordsService = _dataEventRecordsService;
         this.securityService = securityService;
@@ -34,12 +34,16 @@ export var DataEventRecordsListComponent = (function () {
             .GetAll()
             .subscribe(function (data) { return _this.DataEventRecords = data; }, function (error) { return _this.securityService.HandleError(error); }, function () { return console.log('Get all completed'); });
     };
-    DataEventRecordsListComponent = __decorate([
-        Component({
-            selector: 'dataeventrecords-list',
-            templateUrl: 'dataeventrecords-list.component.html'
-        }), 
-        __metadata('design:paramtypes', [DataEventRecordsService, SecurityService, Router])
-    ], DataEventRecordsListComponent);
     return DataEventRecordsListComponent;
 }());
+DataEventRecordsListComponent = __decorate([
+    Component({
+        selector: 'dataeventrecords-list',
+        templateUrl: 'dataeventrecords-list.component.html'
+    }),
+    __metadata("design:paramtypes", [DataEventRecordsService,
+        SecurityService,
+        Router])
+], DataEventRecordsListComponent);
+export { DataEventRecordsListComponent };
+//# sourceMappingURL=dataeventrecords-list.component.js.map

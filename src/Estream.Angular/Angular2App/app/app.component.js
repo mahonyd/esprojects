@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component } from '@angular/core';
 import { SecurityService } from './services/SecurityService';
 import './app.component.css';
-export var AppComponent = (function () {
+var AppComponent = (function () {
     function AppComponent(securityService) {
         this.securityService = securityService;
     }
@@ -28,12 +28,14 @@ export var AppComponent = (function () {
         console.log("Do logout logic");
         this.securityService.Logoff();
     };
-    AppComponent = __decorate([
-        Component({
-            selector: 'my-app',
-            templateUrl: 'app.component.html'
-        }), 
-        __metadata('design:paramtypes', [SecurityService])
-    ], AppComponent);
     return AppComponent;
 }());
+AppComponent = __decorate([
+    Component({
+        selector: 'my-app',
+        templateUrl: 'app.component.html'
+    }),
+    __metadata("design:paramtypes", [SecurityService])
+], AppComponent);
+export { AppComponent };
+//# sourceMappingURL=app.component.js.map

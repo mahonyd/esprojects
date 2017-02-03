@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using static IdentityServer4.IdentityServerConstants;
 
 namespace Estream.IdentityServerAspNetId.Infrastructure
 {
@@ -30,16 +31,13 @@ namespace Estream.IdentityServerAspNetId.Infrastructure
             var principal = await _claimsFactory.CreateAsync(user);
 
             var claims = principal.Claims.ToList();
-            if (!context.AllClaimsRequested)
-            {
-                claims = claims.Where(claim => context.RequestedClaimTypes.Contains(claim.Type)).ToList();
-            }
+            claims = claims.Where(claim => context.RequestedClaimTypes.Contains(claim.Type)).ToList();
 
             // Add User Properties
-            claims.Add(new System.Security.Claims.Claim(StandardScopes.Email.Name, user.Email));
-            claims.Add(new System.Security.Claims.Claim(StandardScopes.Address.Name, user.Address));
-            claims.Add(new System.Security.Claims.Claim(StandardScopes.Phone.Name, user.Mobile));
-            claims.Add(new System.Security.Claims.Claim(StandardScopes.Profile.Name, user.FullName));
+            claims.Add(new Claim(StandardScopes.Email, user.Email));
+            claims.Add(new Claim(StandardScopes.Address, user.Address));
+            claims.Add(new Claim(StandardScopes.Phone, user.Mobile));
+            claims.Add(new Claim(StandardScopes.Profile, user.FullName));
 
             context.IssuedClaims = claims;
         }

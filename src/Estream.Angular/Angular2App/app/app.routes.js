@@ -12,3 +12,4 @@ var appRoutes = [
     { path: 'securefile/securefiles', component: SecureFilesComponent }
 ].concat(DATA_RECORDS_ROUTES);
 export var routing = RouterModule.forRoot(appRoutes);
+//# sourceMappingURL=app.routes.js.map

@@ -31,6 +31,19 @@ namespace Estream.BackendWebApi
             // Get AppSettings configuration
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("api2Admin", policyAdmin =>
+                {
+                    policyAdmin.RequireClaim("role", "api2.admin");
+                });
+                options.AddPolicy("api2User", policyUser =>
+                {
+                    policyUser.RequireClaim("role", "api2.user");
+                });
+
+            });
+
             // Add framework services.
             services.AddMvc();
         }
@@ -44,7 +57,9 @@ namespace Estream.BackendWebApi
             app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
             {
                 Authority = settings.Value.BaseUrls.Auth,
-                ScopeName = "api2",
+                AllowedScopes = new List<string> { "api2" },
+                ApiSecret = "api2Secret",
+                ApiName = "api2",
 
                 RequireHttpsMetadata = false
             });

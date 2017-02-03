@@ -79,7 +79,7 @@ namespace Estream.Mvc
                 ClientSecret = "secret",
 
                 ResponseType = "code id_token",
-                Scope = { "api1", "offline_access" },
+                Scope = { "api1", "api1scope", "offline_access" },
 
                 GetClaimsFromUserInfoEndpoint = true,
                 SaveTokens = true

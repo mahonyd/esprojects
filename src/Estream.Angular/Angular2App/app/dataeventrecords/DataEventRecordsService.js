@@ -12,7 +12,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Configuration } from '../app.constants';
 import { SecurityService } from '../services/SecurityService';
-export var DataEventRecordsService = (function () {
+var DataEventRecordsService = (function () {
     function DataEventRecordsService(_http, _configuration, _securityService) {
         var _this = this;
         this._http = _http;
@@ -59,9 +59,11 @@ export var DataEventRecordsService = (function () {
             this.headers.append('Authorization', tokenValue);
         }
     };
-    DataEventRecordsService = __decorate([
-        Injectable(), 
-        __metadata('design:paramtypes', [Http, Configuration, SecurityService])
-    ], DataEventRecordsService);
     return DataEventRecordsService;
 }());
+DataEventRecordsService = __decorate([
+    Injectable(),
+    __metadata("design:paramtypes", [Http, Configuration, SecurityService])
+], DataEventRecordsService);
+export { DataEventRecordsService };
+//# sourceMappingURL=DataEventRecordsService.js.map

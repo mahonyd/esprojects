@@ -11,7 +11,7 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SecurityService } from '../services/SecurityService';
 import { DataEventRecordsService } from '../dataeventrecords/DataEventRecordsService';
-export var DataEventRecordsEditComponent = (function () {
+var DataEventRecordsEditComponent = (function () {
     function DataEventRecordsEditComponent(_dataEventRecordsService, securityService, _route, _router) {
         this._dataEventRecordsService = _dataEventRecordsService;
         this.securityService = securityService;
@@ -39,12 +39,17 @@ export var DataEventRecordsEditComponent = (function () {
         this._dataEventRecordsService.Update(this.id, this.DataEventRecord)
             .subscribe((function () { return console.log("subscribed"); }), function (error) { return _this.securityService.HandleError(error); }, function () { return _this._router.navigate(['/dataeventrecords']); });
     };
-    DataEventRecordsEditComponent = __decorate([
-        Component({
-            selector: 'dataeventrecords-edit',
-            templateUrl: 'dataeventrecords-edit.component.html'
-        }), 
-        __metadata('design:paramtypes', [DataEventRecordsService, SecurityService, ActivatedRoute, Router])
-    ], DataEventRecordsEditComponent);
     return DataEventRecordsEditComponent;
 }());
+DataEventRecordsEditComponent = __decorate([
+    Component({
+        selector: 'dataeventrecords-edit',
+        templateUrl: 'dataeventrecords-edit.component.html'
+    }),
+    __metadata("design:paramtypes", [DataEventRecordsService,
+        SecurityService,
+        ActivatedRoute,
+        Router])
+], DataEventRecordsEditComponent);
+export { DataEventRecordsEditComponent };
+//# sourceMappingURL=dataeventrecords-edit.component.js.map
