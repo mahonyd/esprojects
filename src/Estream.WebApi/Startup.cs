@@ -8,6 +8,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Newtonsoft.Json.Serialization;
+using IdentityServer4.AccessTokenValidation;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Estream.WebApi
 {
@@ -31,21 +36,38 @@ namespace Estream.WebApi
             // Get AppSettings configuration
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
-            // Configure CORS
-            services.AddCors(options =>
-            {
-                // this defines a CORS policy called "default"
-                options.AddPolicy("default", policy =>
-                {
-                    policy.WithOrigins("http://localhost:5003")
-                        .AllowAnyHeader()
-                        .AllowAnyMethod();
-                });
-            });
+            //Add Cors support to the service
+            services.AddCors();
 
-            services.AddMvcCore()
-                .AddAuthorization()
-                .AddJsonFormatters();
+            var policy = new Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicy();
+
+            policy.Headers.Add("*");
+            policy.Methods.Add("*");
+            policy.Origins.Add("*");
+            policy.SupportsCredentials = true;
+
+            services.AddCors(x => x.AddPolicy("corsGlobalPolicy", policy));
+
+            var guestPolicy = new AuthorizationPolicyBuilder()
+                .RequireAuthenticatedUser()
+                .RequireClaim("scope", "dataEventRecords")
+                .Build();
+
+            // Configure CORS
+            //services.AddCors(options =>
+            //{
+            //    // this defines a CORS policy called "default"
+            //    options.AddPolicy("default", policy =>
+            //    {
+            //        policy.WithOrigins("http://localhost:5003")
+            //            .AllowAnyHeader()
+            //            .AllowAnyMethod();
+            //    });
+            //});
+
+            //services.AddMvcCore()
+            //    .AddAuthorization()
+            //    .AddJsonFormatters();
 
             services.AddAuthorization(options =>
             {
@@ -61,7 +83,14 @@ namespace Estream.WebApi
             });
 
             // Add framework services.
-            services.AddMvc();
+            //services.AddMvc();
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(new AuthorizeFilter(guestPolicy));
+            }).AddJsonOptions(options =>
+            {
+                options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,7 +100,11 @@ namespace Estream.WebApi
             loggerFactory.AddDebug();
 
             // this uses the policy called "default"
-            app.UseCors("default");
+            //app.UseCors("default");
+            app.UseCors("corsGlobalPolicy");
+            //app.UseStaticFiles();
+
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
             app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
             {
@@ -79,7 +112,9 @@ namespace Estream.WebApi
                 AllowedScopes = new List<string> { "api1" },
                 ApiSecret = "api1Secret",
                 ApiName = "api1",
-
+                AutomaticAuthenticate = true,
+                SupportedTokens = SupportedTokens.Both,
+                AutomaticChallenge = true,
                 RequireHttpsMetadata = false
             });
 

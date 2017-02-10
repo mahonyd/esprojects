@@ -24,6 +24,7 @@ namespace Estream.WebApi.Controllers
             _appSettings = appSettings.Value;
         }
 
+        [Authorize("api1User")]
         [HttpGet]
         public async Task<IActionResult> Get()
         {

@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Estream.Mvc
 {
@@ -59,6 +60,8 @@ namespace Estream.Mvc
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            app.UseStatusCodePagesWithRedirects("/Error/{0}");
+
             app.UseStaticFiles();
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions
@@ -66,6 +69,7 @@ namespace Estream.Mvc
                 AuthenticationScheme = "Cookies"
             });
 
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
             app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions
             {
                 AuthenticationScheme = "oidc",

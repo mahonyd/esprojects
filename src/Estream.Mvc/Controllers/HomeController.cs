@@ -2,10 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication;
-using System.Net.Http;
 using Newtonsoft.Json.Linq;
 using System.Net.Http.Headers;
 using Microsoft.Extensions.Options;
+using System.Net.Http;
+using Estream.Mvc.Extensions.System.Net.Http;
+using Microsoft.Extensions.Logging;
 
 namespace Estream.Mvc.Controllers
 {
@@ -13,10 +15,12 @@ namespace Estream.Mvc.Controllers
     public class HomeController : Controller
     {
         private readonly AppSettings _appSettings;
+        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(IOptions<AppSettings> appSettings)
+        public HomeController(IOptions<AppSettings> appSettings, ILogger<HomeController> logger)
         {
             _appSettings = appSettings.Value;
+            _logger = logger;
         }
 
         public IActionResult Index()
@@ -40,11 +44,22 @@ namespace Estream.Mvc.Controllers
             var accessToken = await HttpContext.Authentication.GetTokenAsync("access_token");
 
             var client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-            var response = await client.GetStringAsync(_appSettings.BaseUrls.Api + "/identity");
+            client.SetBearerToken(accessToken);
+            //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
-            ViewBag.Json = JArray.Parse(response).ToString();
-            return View();
+            try
+            {
+                var response = await client.GetStringAsync(_appSettings.BaseUrls.Api + "/identity");
+                //ViewBag.Json = JArray.Parse(response).ToString();
+                return Ok(JArray.Parse(response).ToString());
+
+            }
+            catch (HttpRequestException ex)
+            {
+                _logger.LogError($"Error calling API: {ex}");
+                return StatusCode(403);
+            }
+
         }
 
         [Authorize(Policy = "Administrator")]
